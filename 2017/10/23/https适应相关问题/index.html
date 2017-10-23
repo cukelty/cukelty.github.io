@@ -8,13 +8,23 @@
   <link rel="dns-prefetch" href="https://githb.com/cukelty">
   <title>https适应相关问题 | lty`s zone</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="摘要:">
+<meta name="keywords" content="https">
+<meta property="og:type" content="article">
 <meta property="og:title" content="https适应相关问题">
 <meta property="og:url" content="https://githb.com/cukelty/2017/10/23/https适应相关问题/index.html">
 <meta property="og:site_name" content="lty`s zone">
-<meta property="og:updated_time" content="2017-10-23T01:45:26.193Z">
+<meta property="og:description" content="摘要:">
+<meta property="og:image" content="http://www.5icool.org/uploadfile/2015/1230/20151230112003418.gif">
+<meta property="og:image" content="http://my.csdn.net/uploads/201208/07/1344351176_4808.jpg">
+<meta property="og:image" content="http://dn-linuxcn.qbox.me/data/attachment/album/201512/28/101012hiz8it5354tiaz8e.png">
+<meta property="og:image" content="http://www.5icool.org/uploadfile/2015/1230/20151230112004965.gif">
+<meta property="og:image" content="http://www.5icool.org/uploadfile/2015/1230/20151230112011987.png">
+<meta property="og:updated_time" content="2017-10-23T02:10:31.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="https适应相关问题">
+<meta name="twitter:description" content="摘要:">
+<meta name="twitter:image" content="http://www.5icool.org/uploadfile/2015/1230/20151230112003418.gif">
   
     <link rel="alternative" href="/atom.xml" title="lty`s zone" type="application/atom+xml">
   
@@ -176,7 +186,71 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>摘要:<br><a id="more"></a><br>正文:</p>
+<p>#关于HTTPS的相关问题<br>HTTP (Hypertext Transfer Protocol)超文本传输协议</p>
+<p>HTTPS(Secure Hypertext Transfer Protocol)安全超文本传输协议</p>
+<p><img src="http://www.5icool.org/uploadfile/2015/1230/20151230112003418.gif" alt="mou"></p>
+<p>###HTTPS和HTTP的区别<br>HTTPs协议需要申请证书。<br>http链接很简单，是无状态的HTTPS协议由SSL+HTTP协议构建的可以进行加密传输，身份认证的网络协议，HTTPS协议解决了以下问题：</p>
+<p>1.信任主机的问题</p>
+<p>采用https 的server 必须从CA 申请一个用于证明服务器用途类型的证书。改证书只有用于对应的server 的时候，客户端才信任此主机。所以目前所有的银行系统网站，关键部分应用都是https 的。 客户通过信任该证书，从而信任了该主机。其实这样做效率很低，但是银行更侧重安全。 这一点对我们没有任何意义，我们的server，采用的证书不管自己issue 还是从公众的地方issue， 客户端都是自己人，所以我们也就肯定信任该server。</p>
+<p>2.通讯过程中的数据的泄密和被窜改。</p>
+<p>1)一般意义上的https， 就是 server 有一个证书。</p>
+<p>　　a) 主要目的是保证server 就是他声称的server。这个跟第一点一样。</p>
+<p>　　b) 服务端和客户端之间的所有通讯，都是加密的。<br>　　<br>    （I）具体讲，是客户端产生一个对称的密钥，通过server 的证书来交换密钥。 一般意义上的握手过程。<br>　　（II）加下来所有的信息往来就都是加密的。 第三方即使截获，也没有任何意义。因为他没有密钥。 当然窜改也就没有什么意义了。<br>　　<br>2)少许对客户端有要求的情况下，会要求客户端也必须有一个证书</p>
+<pre><code>a) 这里客户端证书，其实就类似表示个人信息的时候，除了用户名/密码， 还有一个CA （证书授权中心）认证过的身份。 应为个人证书一般来说上别人无法模拟的，所有这样能够更深的确认自己的身份。
+b) 目前少数个人银行的专业版是这种做法，具体证书可能是拿U盘作为一个备份的载体。像我用的交通银行的网上银行就是采取的这种方式。 HTTPS 一定是繁琐的。
+</code></pre><p>##TLS/SSL原理</p>
+<p>HTTPS 协议的主要功能基本都依赖于 TLS/SSL 协议 </p>
+<p>#####SSL    Secure Sockets Layer 安全套接字层</p>
+<p>#####TLS    Transport Layer Security   安全传输层</p>
+<p>均采用传输层加密</p>
+<p><img src="http://my.csdn.net/uploads/201208/07/1344351176_4808.jpg" alt="OSI七层网络模型"></p>
+<p>TLS的前身是SSL，TLS 1.0通常被标示为SSL 3.1，TLS 1.1为SSL 3.2，TLS 1.2为SSL 3.3</p>
+<p><img src="http://dn-linuxcn.qbox.me/data/attachment/album/201512/28/101012hiz8it5354tiaz8e.png" alt="TCP/IP通讯协议"></p>
+<p>TCP/IP通讯协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的网络来完成自己的需求。这4层分别为： </p>
+<p>应用层：应用程序间沟通的层，如简单电子邮件传输（SMTP）、文件传输协议（FTP）、网络远程访问协议（Telnet）等。 </p>
+<p>传输层：在此层中，它提供了节点间的数据传送服务，如传输控制协议（TCP）、用户数据报协议（UDP）等，TCP和UDP给数据包加入传输数据并把它传输到下一层中，这一层负责传送数据，并且确定数据已被送达并接收。 </p>
+<p>互连网络层：负责提供基本的数据封包传送功能，让每一块数据包都能够到达目的主机（但不检查是否被正确接收），如网际协议（IP）。 </p>
+<p>网络接口层：对实际的网络媒体的管理，定义如何使用实际网络（如Ethernet、Serial Line等）来传送数据。</p>
+<p>TLS/SSL 的功能实现主要依赖于三类基本算法：散列函数 Hash、对称加密和非对称加密，其利用非对称加密实现身份认证和密钥协商，对称加密算法采用协商的密钥对数据加密，基于散列函数验证信息的完整性。</p>
+<p><img src="http://www.5icool.org/uploadfile/2015/1230/20151230112004965.gif" alt="原理"></p>
+<p>散列函数 Hash，常见的有 MD5、SHA1、SHA256，该类函数特点是函数单向不可逆、对输入非常敏感、输出长度固定，针对数据的任何修改都会改变散列函数的结果，用于防止信息篡改并验证数据的完整性；对称加密，常见的有 AES-CBC、DES、3DES、AES-GCM等，相同的密钥可以用于信息的加密和解密，掌握密钥才能获取信息，能够防止信息窃听，通信方式是1对1；非对称加密，即常见的 RSA 算法，还包括 ECC、DH 等算法，算法特点是，密钥成对出现，一般称为公钥(公开)和私钥(保密)，公钥加密的信息只能私钥解开，私钥加密的信息只能公钥解开。因此掌握公钥的不同客户端之间不能互相解密信息，只能和掌握私钥的服务器进行加密通信，服务器可以实现1对多的通信，客户端也可以用来验证掌握私钥的服务器身份。</p>
+<p>在信息传输过程中，散列函数不能单独实现信息防篡改，因为明文传输，中间人可以修改信息之后重新计算信息摘要，因此需要对传输的信息以及信息摘要进行加密；对称加密的优势是信息传输1对1，需要共享相同的密码，密码的安全是保证信息安全的基础，服务器和 N 个客户端通信，需要维持 N 个密码记录，且缺少修改密码的机制；非对称加密的特点是信息传输1对多，服务器只需要维持一个私钥就能够和多个客户端进行加密通信，但服务器发出的信息能够被所有的客户端解密，且该算法的计算复杂，加密速度慢。</p>
+<p>TLS 的基本工作方式是，客户端使用非对称加密与服务器进行通信，实现身份验证并协商对称加密使用的密钥，然后对称加密算法采用协商密钥对信息以及信息摘要进行加密通信，不同的节点之间采用的对称密钥不同，从而可以保证信息只能通信双方获取。</p>
+<p>######基于 RSA 握手和密钥交换的客户端验证服务器为示例详解握手过程。<br><img src="http://www.5icool.org/uploadfile/2015/1230/20151230112011987.png" alt="haha"></p>
+<p>#######1.client_hello</p>
+<p>客户端发起请求，以明文传输请求信息，包含版本信息，加密套件候选列表，压缩算法候选列表，随机数，扩展字段等信息，相关信息如下：</p>
+<p>支持的最高TSL协议版本version，从低到高依次 SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2，当前基本不再使用低于 TLSv1 的版本；</p>
+<p>客户端支持的加密套件 cipher suites 列表， 每个加密套件对应前面 TLS 原理中的四个功能的组合：认证算法 Au (身份验证)、密钥交换算法 KeyExchange(密钥协商)、对称加密算法 Enc (信息加密)和信息摘要 Mac(完整性校验);</p>
+<p>支持的压缩算法 compression methods 列表，用于后续的信息压缩传输；</p>
+<p>随机数 random_C，用于后续的密钥的生成；</p>
+<p>扩展字段 extensions，支持协议与算法的相关参数以及其它辅助信息等，常见的 SNI 就属于扩展字段，后续单独讨论该字段作用。</p>
+<p>#######2.server_hello+server_certificate+sever_hello_done</p>
+<p>(a) server_hello, 服务端返回协商的信息结果，包括选择使用的协议版本 version，选择的加密套件 cipher suite，选择的压缩算法 compression method、随机数 random_S 等，其中随机数用于后续的密钥协商;</p>
+<p>(b)server_certificates, 服务器端配置对应的证书链，用于身份验证与密钥交换；</p>
+<p>(c) server_hello_done，通知客户端 server_hello 信息发送结束；</p>
+<p>#######3.证书校验</p>
+<p>客户端验证证书的合法性，如果验证通过才会进行后续通信，否则根据错误情况不同做出提示和操作，合法性验证包括如下：</p>
+<p>证书链的可信性 trusted certificate path，方法如前文所述；</p>
+<p>证书是否吊销 revocation，有两类方式离线 CRL 与在线 OCSP，不同的客户端行为会不同；</p>
+<p>有效期 expiry date，证书是否在有效时间范围；</p>
+<p>域名 domain，核查证书域名是否与当前的访问域名匹配，匹配规则后续分析；</p>
+<p>#######4.client_key_exchange+change_cipher_spec+encrypted_handshake_message</p>
+<p>(a) client_key_exchange，合法性验证通过之后，客户端计算产生随机数字 Pre-master，并用证书公钥加密，发送给服务器；</p>
+<p>(b) 此时客户端已经获取全部的计算协商密钥需要的信息：两个明文随机数 random_C 和 random_S 与自己计算产生的 Pre-master，计算得到协商密钥;</p>
+<p>enc_key=Fuc(random_C, random_S, Pre-Master)</p>
+<p>(c) change_cipher_spec，客户端通知服务器后续的通信都采用协商的通信密钥和加密算法进行加密通信;</p>
+<p>(d) encrypted_handshake_message，结合之前所有通信参数的 hash 值与其它相关信息生成一段数据，采用协商密钥 session secret 与算法进行加密，然后发送给服务器用于数据与握手验证;</p>
+<p>#######6.握手结束</p>
+<p>客户端计算所有接收信息的 hash 值，并采用协商密钥解密 encrypted_handshake_message，验证服务器发送的数据和密钥，验证通过则握手完成；</p>
+<p>#######7.加密通信</p>
+<p>开始使用协商密钥与算法进行加密通信。</p>
+<p>####HTTPS性能<br>HTTPS 原理与优势：身份验证、信息加密与完整性校验等，且未对 TCP 和 HTTP 协议做任何修改。但通过增加新协议以实现更安全的通信必然需要付出代价，HTTPS 协议的性能损耗主要体现如下：</p>
+<p>1.增加延时</p>
+<p>分析前面的握手过程，一次完整的握手至少需要两端依次来回两次通信，至少增加延时2<em> RTT，利用会话缓存从而复用连接，延时也至少1</em> RTT*。</p>
+<p>2.消耗较多的 CPU 资源</p>
+<p>除数据传输之外，HTTPS 通信主要包括对对称加解密、非对称加解密(服务器主要采用私钥解密数据)；</p>
+
       
 
       
@@ -205,6 +279,17 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -270,8 +355,8 @@ var _hmt = _hmt || [];
 <nav id="article-nav">
   
   
-    <a href="/2017/10/19/科大讯飞/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2017/10/23/蓝牙入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">蓝牙入门指导</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -387,6 +472,14 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Bluetooth 蓝牙</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
